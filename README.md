@@ -73,14 +73,7 @@ Możesz łatwo zmienić:
 - Obrazki misia (zamień `mis.png` i `mis-koncowy.png`)
 - Częstotliwość dźwięków w funkcjach `playYesSound()` i `playNoSound()`
 
-## 💝 Użycie
 
-Idealny do:
-
-- Zaproponowania komuś bycia Twoją walentynką
-- Zaproponowania na randkę
-- Wiadomości miłosnej
-- Świętowania Dnia Świętego Walentego
 
 Powodzenia! 💕
 
