@@ -58,40 +58,6 @@ window.addEventListener("load", () => {
   setTimeout(animateQuestion, 300);
 });
 
-// Sound generation using Web Audio API
-function playSound(frequency, duration, type = "sine") {
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  const oscillator = audioContext.createOscillator();
-  const gainNode = audioContext.createGain();
-
-  oscillator.connect(gainNode);
-  gainNode.connect(audioContext.destination);
-
-  oscillator.frequency.value = frequency;
-  oscillator.type = type;
-
-  gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(
-    0.01,
-    audioContext.currentTime + duration,
-  );
-
-  oscillator.start(audioContext.currentTime);
-  oscillator.stop(audioContext.currentTime + duration);
-}
-
-function playYesSound() {
-  playSound(523.25, 0.1); // C5
-  setTimeout(() => playSound(659.25, 0.1), 100); // E5
-  setTimeout(() => playSound(783.99, 0.2), 200); // G5
-}
-
-function playNoSound() {
-  playSound(392, 0.15); // G4
-  setTimeout(() => playSound(349.23, 0.15), 150); // F4
-  setTimeout(() => playSound(329.63, 0.2), 300); // E4
-}
-
 function moveNoButton() {
   noClickCount++;
   currentYesScale += 0.2;
@@ -102,9 +68,6 @@ function moveNoButton() {
   if (noClickCount < funnyMessages.length) {
     questionElement.textContent = funnyMessages[noClickCount];
   }
-
-  // Play "No" sound
-  playNoSound();
 
   noBtn.style.position = "fixed";
   noBtn.style.transition = "left 0.25s ease, top 0.25s ease";
@@ -178,8 +141,6 @@ noBtn.addEventListener("pointerdown", (e) => {
 });
 
 yesBtn.addEventListener("click", () => {
-  playYesSound();
-
   questionScreen.classList.add("hidden");
 
   successScreen.classList.remove("hidden");
