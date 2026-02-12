@@ -60,7 +60,7 @@ window.addEventListener("load", () => {
 
 function moveNoButton() {
   noClickCount++;
-  currentYesScale += 0.2;
+  currentYesScale += 0.1;
   yesBtn.style.transform = `scale(${currentYesScale})`;
   yesBtn.style.transition = "transform 0.25s ease";
 
