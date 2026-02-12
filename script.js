@@ -2,9 +2,21 @@ const questionScreen = document.getElementById("questionScreen");
 const successScreen = document.getElementById("successScreen");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
+const questionElement = document.querySelector(".question");
 
 let noClickCount = 0;
 let currentYesScale = 1;
+
+const funnyMessages = [
+  "Zostaniesz moją walentynką?",
+  "Na pewno? 🥺",
+  "Daj mi szansę! 💔",
+  "Jeszcze jedna szansa? 😭",
+  "Proszę! 💕",
+  "Zmień zdanie! 🥺",
+  "Ostatni raz pytam! 😢",
+  "Okaaay... może teraz? 🥹",
+];
 
 const fallingHeartsContainer = document.getElementById("fallingHearts");
 
@@ -37,11 +49,62 @@ function createFallingHeart() {
 
 setInterval(createFallingHeart, 400);
 
+// Typewriter animation for question
+function animateQuestion() {
+  questionElement.classList.add("typing-animation");
+}
+
+window.addEventListener("load", () => {
+  setTimeout(animateQuestion, 300);
+});
+
+// Sound generation using Web Audio API
+function playSound(frequency, duration, type = "sine") {
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+
+  oscillator.frequency.value = frequency;
+  oscillator.type = type;
+
+  gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(
+    0.01,
+    audioContext.currentTime + duration,
+  );
+
+  oscillator.start(audioContext.currentTime);
+  oscillator.stop(audioContext.currentTime + duration);
+}
+
+function playYesSound() {
+  playSound(523.25, 0.1); // C5
+  setTimeout(() => playSound(659.25, 0.1), 100); // E5
+  setTimeout(() => playSound(783.99, 0.2), 200); // G5
+}
+
+function playNoSound() {
+  playSound(392, 0.15); // G4
+  setTimeout(() => playSound(349.23, 0.15), 150); // F4
+  setTimeout(() => playSound(329.63, 0.2), 300); // E4
+}
+
 function moveNoButton() {
   noClickCount++;
   currentYesScale += 0.2;
   yesBtn.style.transform = `scale(${currentYesScale})`;
   yesBtn.style.transition = "transform 0.25s ease";
+
+  // Update question text with funny message
+  if (noClickCount < funnyMessages.length) {
+    questionElement.textContent = funnyMessages[noClickCount];
+  }
+
+  // Play "No" sound
+  playNoSound();
 
   noBtn.style.position = "fixed";
   noBtn.style.transition = "left 0.25s ease, top 0.25s ease";
@@ -115,6 +178,8 @@ noBtn.addEventListener("pointerdown", (e) => {
 });
 
 yesBtn.addEventListener("click", () => {
+  playYesSound();
+
   questionScreen.classList.add("hidden");
 
   successScreen.classList.remove("hidden");

@@ -214,6 +214,29 @@ body {
   line-height: 1.6;
 }
 
+@keyframes typewriter {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.typing-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 3s steps(30, end) forwards;
+}
+
 @media (max-width: 768px) {
   .bear {
     width: 150px;
