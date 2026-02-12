@@ -76,15 +76,7 @@ body {
 }
 
 .bear-container {
-  position: fixed;
-  top: calc(env(safe-area-inset-top, 20px));
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
   animation: bounce 2s ease-in-out infinite;
-  z-index: 20;
-  pointer-events: none;
 }
 
 @keyframes bounce {
@@ -228,10 +220,6 @@ body {
     height: 150px;
   }
 
-  .bear-container {
-    top: calc(env(safe-area-inset-top, 12px));
-  }
-
   .question {
     font-size: 2em;
   }
@@ -258,10 +246,6 @@ body {
   .bear {
     width: 120px;
     height: 120px;
-  }
-
-  .bear-container {
-    top: 8px;
   }
 
   .question {
