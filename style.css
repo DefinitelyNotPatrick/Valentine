@@ -76,7 +76,12 @@ body {
 }
 
 .bear-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   animation: bounce 2s ease-in-out infinite;
+  z-index: 20;
 }
 
 @keyframes bounce {
@@ -117,7 +122,14 @@ body {
   border: none;
   border-radius: 15px;
   cursor: pointer;
-  font-family: "Comic Sans MS", cursive;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
@@ -213,6 +225,10 @@ body {
     height: 150px;
   }
 
+  .bear-container {
+    top: 12px;
+  }
+
   .question {
     font-size: 2em;
   }
@@ -239,6 +255,10 @@ body {
   .bear {
     width: 120px;
     height: 120px;
+  }
+
+  .bear-container {
+    top: 8px;
   }
 
   .question {
